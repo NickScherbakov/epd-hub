@@ -3,7 +3,11 @@ EPD-Hub: Интеллектуальная платформа мониторин�
 """
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 import logging
+import os
+from pathlib import Path
 from app.database import Base, engine
 from app.api import api_router
 from app.models import (
@@ -42,6 +46,12 @@ app.add_middleware(
 # Include API routers
 app.include_router(api_router)
 
+# Configure static files serving
+frontend_path = Path(__file__).parent.parent.parent / "frontend"
+if frontend_path.exists():
+    logger.info(f"Mounting static files from: {frontend_path}")
+    app.mount("/static", StaticFiles(directory=frontend_path), name="static")
+
 # Health check endpoint
 @app.get("/health")
 async def health_check():
@@ -53,13 +63,24 @@ async def health_check():
 
 @app.get("/")
 async def root():
+    """Root endpoint - returns API info"""
     return {
         "message": "EPD-Hub API",
         "version": "0.1.0",
         "description": "Real-time мониторинг и анализ электронных перевозочных документов",
         "docs": "/docs",
-        "status": "running"
+        "status": "running",
+        "frontend": "/index.html"
     }
+
+@app.get("/index.html")
+async def serve_index():
+    """Serve the main index.html file"""
+    index_path = frontend_path / "index.html"
+    if index_path.exists():
+        return FileResponse(index_path, media_type="text/html")
+    else:
+        return {"error": "index.html not found"}, 404
 
 if __name__ == "__main__":
     import uvicorn
