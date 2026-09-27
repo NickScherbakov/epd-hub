@@ -31,11 +31,10 @@ jobs:
           # Create or switch to gh-pages branch
           git checkout --orphan gh-pages || git checkout gh-pages
           
-          # Remove all existing files
-          rm -rf .
+          # Remove all existing files except .git
+          find . -maxdepth 1 -not -name '.git' -not -name '.' -exec rm -rf {} + || true
           
           # Copy frontend files
-          git checkout HEAD -- .gitignore
           cp -r ${{ github.workspace }}/frontend/* .
           
           # Add and commit
