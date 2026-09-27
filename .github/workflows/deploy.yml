@@ -25,6 +25,10 @@ jobs:
 
       - name: Deploy to gh-pages
         run: |
+          # Save frontend files before switching branches
+          TEMP_DIR=$(mktemp -d)
+          cp -r ${{ github.workspace }}/frontend/* "$TEMP_DIR/"
+          
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           
@@ -34,8 +38,9 @@ jobs:
           # Remove all existing files except .git
           find . -maxdepth 1 -not -name '.git' -not -name '.' -exec rm -rf {} + || true
           
-          # Copy frontend files
-          cp -r ${{ github.workspace }}/frontend/* .
+          # Copy frontend files back
+          cp -r "$TEMP_DIR"/* .
+          rm -rf "$TEMP_DIR"
           
           # Add and commit
           git add -A
