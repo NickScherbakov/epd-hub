@@ -1,0 +1,386 @@
+/* ==================== Responsive Design ==================== */
+
+/* ==================== Mobile Devices (320px and up) ==================== */
+@media (max-width: 768px) {
+    /* Typography */
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 40px;
+    }
+
+    /* Navbar */
+    .navbar .container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .navbar-brand {
+        width: 100%;
+    }
+
+    .navbar-menu {
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+        gap: 10px;
+        padding: 15px 0;
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .navbar-menu li {
+        text-align: center;
+    }
+
+    .navbar-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .navbar-actions .btn {
+        width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+        padding: 60px 20px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+    }
+
+    /* Sections */
+    section {
+        padding: 50px 20px;
+    }
+
+    /* Features Grid */
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .feature-card {
+        padding: 20px;
+    }
+
+    /* Steps */
+    .steps {
+        gap: 15px;
+    }
+
+    .step {
+        flex: 0 1 100%;
+    }
+
+    .step-arrow {
+        display: none;
+    }
+
+    .steps .step:not(:last-child)::after {
+        content: '↓';
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        margin: 10px 0;
+    }
+
+    /* Audience Grid */
+    .audience-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .audience-card:hover {
+        transform: translateX(5px);
+    }
+
+    /* Tech Stack Grid */
+    .tech-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* CTA */
+    .cta {
+        padding: 50px 20px;
+    }
+
+    .cta h2 {
+        font-size: 1.8rem;
+    }
+
+    .cta > p {
+        font-size: 1rem;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .cta-buttons .btn {
+        width: 100%;
+    }
+
+    /* Footer */
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer {
+        padding: 40px 20px 20px;
+    }
+
+    /* API Status Widget */
+    .api-status {
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+        width: calc(100% - 20px);
+        justify-content: center;
+    }
+
+    .status-info {
+        position: fixed;
+        bottom: auto;
+        top: 60px;
+        right: 10px;
+        left: 10px;
+        width: calc(100% - 20px);
+    }
+}
+
+/* ==================== Small Tablets (769px to 1024px) ==================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .audience-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tech-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .steps {
+        flex-wrap: wrap;
+    }
+
+    .step-arrow {
+        display: none;
+    }
+
+    .step {
+        flex: 0 1 calc(50% - 10px);
+        margin-bottom: 20px;
+    }
+
+    .steps .step:nth-child(even) .step-arrow {
+        width: 100%;
+        text-align: center;
+        margin: 10px 0;
+    }
+}
+
+/* ==================== Large Devices (1025px and up) ==================== */
+@media (min-width: 1025px) {
+    /* Smooth hover effects */
+    .feature-card {
+        border: 1px solid transparent;
+    }
+
+    .feature-card:hover {
+        border-color: var(--primary-color);
+    }
+
+    /* Navbar improvements */
+    .navbar .container {
+        padding: 15px 20px;
+    }
+
+    .navbar-menu {
+        gap: 25px;
+    }
+}
+
+/* ==================== Extra Large Devices (1440px and up) ==================== */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1400px;
+    }
+
+    .hero-title {
+        font-size: 4rem;
+    }
+
+    section {
+        padding: 100px 20px;
+    }
+
+    .section-title {
+        font-size: 3rem;
+        margin-bottom: 80px;
+    }
+}
+
+/* ==================== Landscape Mode ==================== */
+@media (max-height: 600px) and (orientation: landscape) {
+    .hero {
+        padding: 40px 20px;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+
+    .hero-buttons {
+        gap: 10px;
+    }
+
+    section {
+        padding: 40px 20px;
+    }
+}
+
+/* ==================== Reduced Motion ==================== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* ==================== Dark Mode ==================== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --light-bg: #2a2a2a;
+        --white: #1a1a1a;
+        --text-primary: #e0e0e0;
+        --text-secondary: #b0b0b0;
+        --border-color: #3a3a3a;
+        --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .navbar {
+        background-color: var(--white);
+        border-bottom-color: var(--border-color);
+    }
+
+    .feature-card {
+        background-color: var(--white);
+        border-color: var(--border-color);
+    }
+
+    .audience-card {
+        background-color: var(--white);
+    }
+
+    .btn-secondary {
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    .btn-secondary:hover {
+        background-color: var(--primary-color);
+        color: var(--white);
+    }
+
+    .api-status {
+        background-color: var(--white);
+    }
+
+    .status-info {
+        background-color: var(--white);
+        border-color: var(--border-color);
+    }
+}
+
+/* ==================== Touch Devices ==================== */
+@media (hover: none) and (pointer: coarse) {
+    .btn {
+        padding: 15px 25px;
+    }
+
+    .feature-card,
+    .audience-card {
+        transform: none;
+    }
+
+    .feature-card:active {
+        transform: translateY(-8px);
+    }
+
+    .audience-card:active {
+        transform: translateX(10px);
+    }
+
+    a {
+        padding: 8px 4px;
+    }
+}
+
+/* ==================== High Resolution Displays ==================== */
+@media (min-width: 1920px) {
+    .container {
+        max-width: 1600px;
+    }
+
+    section {
+        padding: 120px 20px;
+    }
+
+    .section-title {
+        font-size: 3.5rem;
+        margin-bottom: 100px;
+    }
+
+    .feature-card,
+    .audience-card,
+    .tech-item {
+        padding: 40px;
+    }
+}

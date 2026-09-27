@@ -1,0 +1,27 @@
+{
+  "name": "epd-hub-frontend",
+  "version": "0.1.0",
+  "description": "EPD-Hub Frontend - Интеллектуальная платформа мониторинга электронных перевозочных документов",
+  "type": "module",
+  "scripts": {
+    "dev": "python -m http.server 3000",
+    "build": "echo 'Static site - no build needed'",
+    "preview": "python -m http.server 8080",
+    "test": "echo 'No tests configured'"
+  },
+  "keywords": [
+    "epd",
+    "электронные перевозочные документы",
+    "мониторинг",
+    "нормативная база",
+    "api"
+  ],
+  "author": "Nick Scherbakov",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NickScherbakov/epd-hub.git"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}
