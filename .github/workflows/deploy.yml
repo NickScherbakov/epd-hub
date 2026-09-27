@@ -8,9 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: "pages"
@@ -18,22 +16,30 @@ concurrency:
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
         with:
-          path: './frontend'
+          fetch-depth: 0
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Deploy to gh-pages
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          
+          # Create or switch to gh-pages branch
+          git checkout --orphan gh-pages || git checkout gh-pages
+          
+          # Remove all existing files except .git
+          find . -maxdepth 1 -not -name '.git' -not -name '.' -exec rm -rf {} + || true
+          
+          # Copy frontend files
+          cp -r ${{ github.workspace }}/frontend/* .
+          
+          # Add and commit
+          git add -A
+          git commit -m "Deploy to GitHub Pages from ${{ github.sha }}" || echo "No changes to commit"
+          
+          # Force push to gh-pages
+          git push -f origin gh-pages
