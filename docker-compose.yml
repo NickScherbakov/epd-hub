@@ -36,6 +36,8 @@ services:
     environment:
       DATABASE_URL: postgresql://epd_user:epd_password@postgres:5432/epd_hub
       REDIS_URL: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
       DEBUG: "true"
       LOG_LEVEL: INFO
     ports:
@@ -56,11 +58,17 @@ services:
     environment:
       DATABASE_URL: postgresql://epd_user:epd_password@postgres:5432/epd_hub
       REDIS_URL: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+      NOTEBOOKLM_NOTEBOOK_URL: ${NOTEBOOKLM_NOTEBOOK_URL}
+      NOTEBOOKLM_STATE_DIR: /app/data/notebooklm_state
+      ASK_CACHE_TTL_SECONDS: ${ASK_CACHE_TTL_SECONDS:-3600}
     depends_on:
       - postgres
       - redis
     volumes:
       - ./backend:/app
+      - notebooklm_state:/app/data/notebooklm_state
     command: celery -A app.tasks worker --loglevel=info
 
   celery_beat:
@@ -70,6 +78,8 @@ services:
     environment:
       DATABASE_URL: postgresql://epd_user:epd_password@postgres:5432/epd_hub
       REDIS_URL: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
     depends_on:
       - postgres
       - redis
@@ -80,3 +90,4 @@ services:
 volumes:
   postgres_data:
   redis_data:
+  notebooklm_state:

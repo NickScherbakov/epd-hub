@@ -2,7 +2,7 @@
 API routers initialization
 """
 from fastapi import APIRouter
-from app.api import documents, changes, notifications
+from app.api import documents, changes, notifications, ask
 
 # Create main API router
 api_router = APIRouter()
@@ -11,5 +11,6 @@ api_router = APIRouter()
 api_router.include_router(documents.router)
 api_router.include_router(changes.router)
 api_router.include_router(notifications.router)
+api_router.include_router(ask.router)
 
 __all__ = ["api_router"]
