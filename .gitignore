@@ -52,3 +52,6 @@ Thumbs.db
 crawler_data/
 downloads/
 temp/
+
+# NotebookLM browser session state - contains Google account session cookies
+notebooklm_state/

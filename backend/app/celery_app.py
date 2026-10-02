@@ -8,10 +8,14 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Initialize Celery
+# include=["app.tasks"] ensures task modules are imported (and their @celery_app.task
+# definitions registered) regardless of which module the worker is launched with
+# (-A app.celery_app:celery_app does not itself import app.tasks).
 celery_app = Celery(
     "epd_hub",
     broker=settings.CELERY_BROKER_URL,
-    backend=settings.CELERY_RESULT_BACKEND
+    backend=settings.CELERY_RESULT_BACKEND,
+    include=["app.tasks"]
 )
 
 # Configure Celery
