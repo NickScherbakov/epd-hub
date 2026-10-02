@@ -27,8 +27,10 @@ class ChangeSource(str, Enum):
 
 
 # Association table for many-to-many relationship between Change and Tag
+# Named distinctly from the `change_tags` table below (ChangeTag model) -
+# that table holds the actual tags; this one only links changes to tags.
 change_tags_association = Table(
-    'change_tags',
+    'change_tag_links',
     Base.metadata,
     Column('change_id', Integer, ForeignKey('changes.id', ondelete='CASCADE')),
     Column('tag_id', Integer, ForeignKey('change_tags.id', ondelete='CASCADE'))

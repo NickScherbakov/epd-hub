@@ -288,6 +288,16 @@
         </div>
     </div>
 
+    <!-- Виджет базы знаний ЭПД -->
+    <div id="ask-container"></div>
+    <script src="js/ask-widget.js"></script>
+    <script>
+      // Фронтенд раздаётся через GitHub Pages — бэкенд живёт на своём домене/порту.
+      // Укажите реальный адрес API перед деплоем (например https://api.epd-hub.ru).
+      // window.EPD_API_BASE = 'https://api.epd-hub.ru';
+      AskWidget.mount('#ask-container');
+    </script>
+
     <script src="js/main.js"></script>
 </body>
 </html>
