@@ -62,13 +62,27 @@ async def setup_auth():
         print(f"Браузер открыт. URL: {NOTEBOOK_URL}")
         print("\nВойдите в аккаунт и нажмите Enter здесь когда будете готовы...")
 
-        # Ждём нажатия Enter в терминале
         loop = asyncio.get_event_loop()
-        await loop.run_in_executor(None, input)
+
+        # Не доверяем на слово "нажмите Enter" — проверяем, что браузер
+        # реально стоит на notebooklm.google.com, а не завис на экране
+        # входа Google. Инцидент 2026-10-02: сессия была сохранена с двух
+        # кук (GAPS/NID) с середины флоу логина - этого недостаточно для
+        # аутентификации, и headless-сессия потом получала редирект обратно
+        # на accounts.google.com при каждом запросе.
+        while True:
+            await loop.run_in_executor(None, input)
+            current_url = page.url
+            if "accounts.google.com" in current_url:
+                print(f"\n⚠ Браузер всё ещё на странице входа Google ({current_url[:60]}...)")
+                print("Логин не завершён. Войдите полностью, дождитесь, пока ноутбук")
+                print("реально откроется (виден текст/чат, не форма логина), и нажмите Enter ещё раз...")
+                continue
+            break
 
         # Сохраняем состояние браузера
         await context.storage_state(path=str(state_file))
-        print(f"\n✅ Сессия сохранена: {state_file}")
+        print(f"\n✅ Сессия сохранена: {state_file} (текущий URL: {page.url[:60]}...)")
         print("Теперь EPD-Hub может работать с NotebookLM в headless-режиме.\n")
 
         await context.close()
