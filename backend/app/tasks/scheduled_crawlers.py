@@ -4,7 +4,7 @@ Scheduled Celery tasks for background processing
 import logging
 from app.celery_app import celery_app
 from app.database import SessionLocal
-from app.services import CrawlerService
+from app.services.crawler_service import CrawlerService
 from app.models import Notification
 from datetime import datetime
 
