@@ -292,9 +292,9 @@
     <div id="ask-container"></div>
     <script src="js/ask-widget.js"></script>
     <script>
-      // Фронтенд раздаётся через GitHub Pages — бэкенд живёт на своём домене/порту.
-      // Укажите реальный адрес API перед деплоем (например https://api.epd-hub.ru).
-      // window.EPD_API_BASE = 'https://api.epd-hub.ru';
+      // Фронтенд раздаётся через GitHub Pages — бэкенд проксируется через IIS
+      // на infolimp.ru (reverse proxy -> 127.0.0.1:8010 на том же сервере).
+      window.EPD_API_BASE = 'https://infolimp.ru/epd-api';
       AskWidget.mount('#ask-container');
     </script>
 
